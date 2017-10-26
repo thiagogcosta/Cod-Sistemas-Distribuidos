@@ -1,0 +1,5 @@
+.idea
+/vendor
+/app.db
+/last_update.txt
+/composer.lock
