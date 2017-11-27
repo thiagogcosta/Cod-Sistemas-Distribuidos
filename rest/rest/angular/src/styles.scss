@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~ng2-toasty/style-default.css";
+@import "../node_modules/sweetalert2/dist/sweetalert2.css";
+@import "~ng2-toasty/style-default.css";
+@import "~@swimlane/ngx-datatable/release/index.css";
+@import "~@swimlane/ngx-datatable/release/themes/material.css";
+@import "~@swimlane/ngx-datatable/release/assets/icons.css";
+
+
+/*** CHART ***/
+.orgchart .second-menu-icon {
+    transition: opacity .5s;
+    opacity: 0;
+    right: -5px;
+    top: -5px;
+    z-index: 2;
+    color: rgba(68, 157, 68, 0.5);
+    font-size: 18px;
+    position: absolute;
+}
+
+#chart-network.r2l .orgchart .second-menu-icon {
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+}
+
+#chart-network.l2r .orgchart .second-menu-icon {
+    -webkit-transform: rotate(-90deg) rotateY(180deg);
+    transform: rotate(-90deg) rotateY(180deg);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+}
+
+#chart-network.b2t .orgchart .second-menu-icon {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.orgchart .second-menu-icon:hover {
+    color: #449d44;
+}
+.orgchart .node:hover .second-menu-icon {
+    opacity: 1;
+}
+.orgchart .node .second-menu {
+    position: absolute;
+    top: 0;
+    right: -70px;
+    border-radius: 35px;
+    box-shadow: 0 0 10px 1px #999;
+    background-color: #fff;
+    z-index: 1;
+}
+.orgchart .node .second-menu .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    float: left;
+    margin: 5px;
+}
+
+#chart-network.r2l .orgchart .node .second-menu {
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+}
+
+#chart-network.l2r .orgchart .node .second-menu {
+    -webkit-transform: rotate(-90deg) rotateY(180deg);
+    transform: rotate(-90deg) rotateY(180deg);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+}
+
+#chart-network.b2t .orgchart .node .second-menu {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+#chart-network {
+    text-align: center;
+}
+
+#chart-network .orgchart .node .title {
+    background-color: #f44336;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+}
+
+#chart-network .orgchart {
+    background-image: none;
+}
+
+#chart-network.l2r {
+    text-align: left;
+}
+
+#chart-network.r2l {
+    text-align: right;
+}
+
+body{
+    overflow-y: hidden;
+}

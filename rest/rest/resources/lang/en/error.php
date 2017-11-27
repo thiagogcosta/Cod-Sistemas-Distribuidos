@@ -1,0 +1,25 @@
+<?php
+return [
+	'unknown' 			    => 'Something went wrong',
+	'not-found'	    		=> 'Not found',
+	'user-not-found'	    => 'User not found',
+	'entity-not-found'	    => 'Entity type not found',
+	'database-not-found'    => 'Database not found',
+	'category-not-found'    => 'Category not found',
+	'application-not-found' => 'Application not found',
+	'validation'			=> 'The given data failed to pass validation',
+	'extension-not-found'	=> 'Extension not found',
+	'roles-not-found'		=> 'Role not found',
+	'attribute-not-found' 	=> 'Attribute not found',
+	'missing-attr-type'		=> 'Attribute type not supplied',
+	'missing-attr-set'		=> 'Attribute set id not supplied',
+	'attribute-set-not-found' => 'Attribute set not found',
+	'attribute-group-not-found' => 'Attribute group not found',
+	'access-denied' => 'Access denied!',
+	'invalid_attribute_context' => 'The attribute doesn\'t belongs to item\'s attribute_set (:table)',
+	'customer-not-found'	=> 'Customer not found',
+	'attribute-set-required'=> 'Attribute set is required',
+	'invalid-attr-set'		=> 'Invalid attribute set',
+	'invalid-characters' 	=> 'Invalid caract',
+	'empty-attr-entity-id'  => 'The attributes_entity_type_id is missing or the entity code is invalid'
+];

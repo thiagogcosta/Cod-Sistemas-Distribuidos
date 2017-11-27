@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="ingles200h" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+  <table name="attributes" idMethod="native" phpName="Attributes">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="attributes_entity_type_id" phpName="AttributesEntityTypeId" type="INTEGER" required="true"/>
+    <column name="code" phpName="Code" type="VARCHAR" size="100" required="true"/>
+    <column name="label" phpName="Label" type="VARCHAR" size="200" required="true"/>
+    <column name="frontend_type" phpName="FrontendType" type="CHAR" sqlType="enum('text','textarea','date','boolean','multiselect','select','price','password','email','image','number')" required="true"/>
+    <column name="backend_type" phpName="BackendType" type="CHAR" sqlType="enum('varchar','int','decimal','text','datetime')" required="true"/>
+    <column name="validators" phpName="Validators" type="LONGVARCHAR"/>
+    <column name="configs" phpName="Configs" type="LONGVARCHAR"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="attributes_entity_types" name="fk-attributes-attributes_entity_types1">
+      <reference local="attributes_entity_type_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-attributes-attributes_entity_types1_idx">
+      <index-column name="attributes_entity_type_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_entity_types" idMethod="native" phpName="AttributesEntityTypes">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="code" phpName="Code" type="VARCHAR" size="100" required="true"/>
+    <column name="table" phpName="Table" type="VARCHAR" size="100" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_groups" idMethod="native" phpName="AttributesGroups">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="100" required="true"/>
+    <column name="order" phpName="Order" type="INTEGER"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <column name="attributes_set_id" phpName="AttributesSetId" type="INTEGER" required="true"/>
+    <foreign-key foreignTable="attributes_sets" name="fk_attributes_groups_set">
+      <reference local="attributes_set_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk_attributes_groups_set">
+      <index-column name="attributes_set_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_options" idMethod="native" phpName="AttributesOptions">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="attribute_id" phpName="AttributeId" type="INTEGER" required="true"/>
+    <column name="label" phpName="Label" type="VARCHAR" size="255" required="true"/>
+    <column name="value" phpName="Value" type="VARCHAR" size="255" required="true"/>
+    <column name="position" phpName="Position" type="INTEGER" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="attributes" name="fk-attributes_options-attributes1">
+      <reference local="attribute_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-attributes_options-attributes1_idx">
+      <index-column name="attribute_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_relations" idMethod="native" phpName="AttributesRelations">
+    <column name="attributes_group_id" phpName="AttributesGroupId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="attribute_id" phpName="AttributeId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="order" phpName="Order" type="INTEGER"/>
+    <foreign-key foreignTable="attributes" name="fk-attributes_relations-attributes1">
+      <reference local="attribute_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="attributes_groups" name="fk-attributes_relations-attributes_groups1">
+      <reference local="attributes_group_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-attributes_relations-attributes1_idx">
+      <index-column name="attribute_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_sets" idMethod="native" phpName="AttributesSets">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="attributes_entity_type_id" phpName="AttributesEntityTypeId" type="INTEGER" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="100" required="true"/>
+    <column name="default" phpName="Default" type="CHAR" sqlType="enum('yes','no')" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="attributes_entity_types" name="fk-attributes_sets-attributes_entity_types1">
+      <reference local="attributes_entity_type_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-attributes_sets-attributes_entity_types1_idx">
+      <index-column name="attributes_entity_type_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_value_datetime" idMethod="native" phpName="AttributesValueDatetime">
+    <column name="attribute_id" phpName="AttributeId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="entity_id" phpName="EntityId" type="INTEGER" required="true"/>
+    <column name="value" phpName="Value" type="TIMESTAMP"/>
+    <foreign-key foreignTable="attributes" name="fk-attributes_value_datetime-attributes1">
+      <reference local="attribute_id" foreign="id"/>
+    </foreign-key>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_value_decimal" idMethod="native" phpName="AttributesValueDecimal">
+    <column name="attribute_id" phpName="AttributeId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="entity_id" phpName="EntityId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="value" phpName="Value" type="DECIMAL" size="12" scale="4"/>
+    <foreign-key foreignTable="attributes" name="fk-attributes_value_decimal-attributes1">
+      <reference local="attribute_id" foreign="id"/>
+    </foreign-key>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_value_int" idMethod="native" phpName="AttributesValueInt">
+    <column name="attribute_id" phpName="AttributeId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="entity_id" phpName="EntityId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="value" phpName="Value" type="INTEGER"/>
+    <foreign-key foreignTable="attributes" name="fk-attributes_value_int-attributes1">
+      <reference local="attribute_id" foreign="id"/>
+    </foreign-key>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_value_text" idMethod="native" phpName="AttributesValueText">
+    <column name="attribute_id" phpName="AttributeId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="entity_id" phpName="EntityId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="value" phpName="Value" type="LONGVARCHAR"/>
+    <foreign-key foreignTable="attributes" name="fk-attributes_value_text-attributes1">
+      <reference local="attribute_id" foreign="id"/>
+    </foreign-key>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="attributes_value_varchar" idMethod="native" phpName="AttributesValueVarchar">
+    <column name="attribute_id" phpName="AttributeId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="entity_id" phpName="EntityId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="value" phpName="Value" type="VARCHAR" size="255"/>
+    <foreign-key foreignTable="attributes" name="fk-attributes_value_varchar-attributes1">
+      <reference local="attribute_id" foreign="id"/>
+    </foreign-key>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="categories" idMethod="native" phpName="Categories">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="attributes_set_id" phpName="AttributesSetId" type="INTEGER" required="true"/>
+    <column name="category_id" phpName="CategoryId" type="INTEGER"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="categories" name="fk-categories-categories1">
+      <reference local="category_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="attributes_sets" name="fk-categories-attributes_sets1">
+      <reference local="attributes_set_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-categories-attributes_sets1_idx">
+      <index-column name="attributes_set_id"/>
+    </index>
+    <index name="fk-categories-categories1_idx">
+      <index-column name="category_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="employees" idMethod="native" phpName="Employees">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="attributes_set_id" phpName="AttributesSetId" type="INTEGER" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="attributes_sets" name="fk-employees-attributes_sets1">
+      <reference local="attributes_set_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-employees-attributes_sets1_idx">
+      <index-column name="attributes_set_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="producers" idMethod="native" phpName="Producers">
+    <column name="user_id" phpName="UserId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="attributes_set_id" phpName="AttributesSetId" type="INTEGER" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="attributes_sets" name="fk-producers-attributes_sets1">
+      <reference local="attributes_set_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="fk-producers-users">
+      <reference local="user_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-producers-users-idx">
+      <index-column name="user_id"/>
+    </index>
+    <index name="fk-producers-attributes_sets1_idx">
+      <index-column name="attributes_set_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="products" idMethod="native" phpName="Products">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="producer_id" phpName="ProducerId" type="INTEGER"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <column name="deleted_at" phpName="DeletedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="producers" name="fk-products-producers">
+      <reference local="producer_id" foreign="user_id"/>
+    </foreign-key>
+    <index name="fk-products-producers-idx">
+      <index-column name="producer_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="products_categories" idMethod="native" phpName="ProductsCategories">
+    <column name="products_id" phpName="ProductsId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="categories_id" phpName="CategoriesId" type="INTEGER" primaryKey="true" required="true"/>
+    <foreign-key foreignTable="categories" name="fk-products_categories-categories1">
+      <reference local="categories_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="products" name="fk-products_categories-products1">
+      <reference local="products_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-products_categories-categories1_idx">
+      <index-column name="categories_id"/>
+    </index>
+    <index name="fk-products_categories-products1_idx">
+      <index-column name="products_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="products_versions" idMethod="native" phpName="ProductsVersions">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="attributes_set_id" phpName="AttributesSetId" type="INTEGER" required="true"/>
+    <column name="product_id" phpName="ProductId" type="INTEGER" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="attributes_sets" name="fk-products_versions-attributes_sets1">
+      <reference local="attributes_set_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="products" name="fk-products_versions-products">
+      <reference local="product_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-products_versions-products-idx">
+      <index-column name="product_id"/>
+    </index>
+    <index name="fk-products_versions-attributes_sets1_idx">
+      <index-column name="attributes_set_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="products_versions_mlm" idMethod="native" phpName="ProductsVersionsMlm">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="products_version_id" phpName="ProductsVersionId" type="INTEGER" required="true"/>
+    <column name="type" phpName="Type" type="CHAR" sqlType="enum('first','recurrent')" required="true"/>
+    <column name="level" phpName="Level" type="INTEGER" required="true"/>
+    <column name="value" phpName="Value" type="DECIMAL" size="10" scale="2" required="true"/>
+    <foreign-key foreignTable="products_versions" name="fk-products_versions_mlm-products_versions1">
+      <reference local="products_version_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-products_versions_mlm-products_versions1_idx">
+      <index-column name="products_version_id"/>
+    </index>
+    <unique name="index3">
+      <unique-column name="products_version_id"/>
+      <unique-column name="level"/>
+      <unique-column name="type"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="sales_commissions" idMethod="native" phpName="SalesCommissions">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="payment_id" phpName="PaymentId" type="INTEGER" required="true"/>
+    <column name="user_id" phpName="UserId" type="INTEGER" required="true"/>
+    <column name="level" phpName="Level" type="INTEGER" required="true"/>
+    <column name="value" phpName="Value" type="DECIMAL" size="10" scale="2" required="true"/>
+    <column name="paid" phpName="Paid" type="CHAR" sqlType="enum('yes','no')" required="true" defaultValue="no"/>
+    <column name="active" phpName="Active" type="CHAR" sqlType="enum('yes','no')" required="true" defaultValue="yes"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="users" name="fk-commissions-users">
+      <reference local="user_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="sales_payments" name="fk-commissions-payments">
+      <reference local="payment_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-commissions-users-idx">
+      <index-column name="user_id"/>
+    </index>
+    <index name="fk-commissions-payments-idx">
+      <index-column name="payment_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="sales_orders" idMethod="native" phpName="SalesOrders">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="user_id" phpName="UserId" type="INTEGER" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="users" name="fk-orders-users">
+      <reference local="user_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-orders-users-idx">
+      <index-column name="user_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="sales_orders_items" idMethod="native" phpName="SalesOrdersItems">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="order_id" phpName="OrderId" type="INTEGER" required="true"/>
+    <column name="products_version_id" phpName="ProductsVersionId" type="INTEGER" required="true"/>
+    <column name="qty" phpName="Qty" type="INTEGER" required="true"/>
+    <foreign-key foreignTable="sales_orders" name="fk-orders_items-orders">
+      <reference local="order_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="products_versions" name="fk-orders_items-products_versions">
+      <reference local="products_version_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-orders_items-orders-idx">
+      <index-column name="order_id"/>
+    </index>
+    <index name="fk-orders_items-products_versions-idx">
+      <index-column name="products_version_id"/>
+    </index>
+    <unique name="uq-orders_items-product_versions">
+      <unique-column name="order_id"/>
+      <unique-column name="products_version_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="sales_payments" idMethod="native" phpName="SalesPayments">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="order_id" phpName="OrderId" type="INTEGER" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="sales_orders" name="fk-payments-orders">
+      <reference local="order_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-payments-orders-idx">
+      <index-column name="order_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="seed_migration" idMethod="native" phpName="SeedMigration">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="namespace" phpName="Namespace" type="VARCHAR" size="255" required="true"/>
+    <column name="version" phpName="Version" type="VARCHAR" size="10" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="users" idMethod="native" phpName="Users">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="attributes_set_id" phpName="AttributesSetId" type="INTEGER" required="true"/>
+    <column name="user_id" phpName="UserId" type="INTEGER"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true"/>
+    <column name="deleted_at" phpName="DeletedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="attributes_sets" name="fk-users-attributes_sets1">
+      <reference local="attributes_set_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="fk-users-users">
+      <reference local="user_id" foreign="id"/>
+    </foreign-key>
+    <index name="fk-users-users-idx">
+      <index-column name="user_id"/>
+    </index>
+    <index name="fk-users-attributes_sets1_idx">
+      <index-column name="attributes_set_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>

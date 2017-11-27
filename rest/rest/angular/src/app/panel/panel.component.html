@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <div class="sidebar" data-color='red' data-image="">
+        <sidebar-cmp [menuItems]="getMenuItems()"></sidebar-cmp>
+        <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+    </div>
+    <div class="main-panel">
+        <navbar-cmp></navbar-cmp>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

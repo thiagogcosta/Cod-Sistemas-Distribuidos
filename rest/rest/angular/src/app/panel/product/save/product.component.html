@@ -1,0 +1,45 @@
+<div>
+    <h1 fxFlex="100%" style="margin: 30px"> {{title}} </h1>
+</div>
+<div style="margin: 30px;">
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="method == 'update'">
+            <button type="button" md-raised-button color="warn" style="float:right;margin: 0px 10px 20px;" (click)="delete()" >Remover</button>
+        </div>
+        <button type="submit" md-raised-button color="primary" style="float:right;margin-bottom: 10px">Salvar</button>
+        <div style="clear: both"></div>
+        <div *ngIf="productLoaded" style="width: 100%;float: left;">
+            <md-card style="margin-bottom: 20px;">
+                <md-card-header style="margin-bottom: 25px;">
+                    <md-card-title><h4>Geral</h4></md-card-title>
+                </md-card-header>
+                <md-card-content>
+                    <md-input-container style="width:100%;">
+                        <input [(ngModel)]="product['name']" mdInput #message type="text" name="name" maxlength="256" placeholder="Nome" value="{{product['name']}}" >
+                    </md-input-container>
+                </md-card-content>
+                <md-card-content>
+                    <md-input-container style="width:100%;">
+                        <input [(ngModel)]="product['description']" mdInput #message type="text" name="description" maxlength="256" placeholder="Descrição" value="{{product['description']}}" >
+                    </md-input-container>
+                </md-card-content>
+                <md-card-content>
+                    <md-input-container style="width:100%;">
+                        <input [(ngModel)]="product['sku']" mdInput #message type="text" name="sku" maxlength="256" placeholder="SKU" value="{{product['sku']}}" >
+                    </md-input-container>
+                </md-card-content>
+                <md-card-content>
+                    <md-input-container style="width:100%;">
+                        <input [(ngModel)]="product['bars_code']" mdInput #message type="text" name="bars_code" maxlength="256" placeholder="Código de Barras" value="{{product['bars_code']}}" >
+                    </md-input-container>
+                </md-card-content>
+                <md-card-content>
+                    <md-input-container style="width:100%;">
+                        <input [(ngModel)]="product['price']" mdInput #message type="text" name="price" maxlength="256" placeholder="Preço" value="{{product['price']}}" >
+                    </md-input-container>
+                </md-card-content>
+            </md-card>
+        </div>
+    </form>
+</div>
+<ms-loading-overlay [isLoading]="isLoading"></ms-loading-overlay>

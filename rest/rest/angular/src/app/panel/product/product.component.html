@@ -1,0 +1,65 @@
+<div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="center center" style="margin: 24px 0;">
+        <md-card fxFlex>
+            <md-card-title>Produtos</md-card-title>
+
+            <md-divider></md-divider>
+
+            <md-card-content fxLayout="column">
+                <div>
+                    <button md-raised-button color="primary" [route]="['panel.products-new']">Adicionar</button>
+                </div>
+                <br>
+                <div fxFlex class="mat-elevation-z2" *ngIf="pageExists">
+                    <ngx-datatable
+                            class='material'
+                            [rows]='rows'
+                            [columnMode]="'force'"
+                            [headerHeight]="50"
+                            [footerHeight]="50"
+                            [rowHeight]="'auto'"
+                            [externalPaging]="true"
+                            [externalSorting]="true"
+                            [count]="page.total"
+                            [offset]="page.current_page"
+                            [limit]="page.per_page"
+                            (activate)="edit($event)"
+                            (page)='setPage($event)'
+                            (sort)='setSort($event)'>
+                        <ngx-datatable-column name="ID" prop="id" width="300">
+                            <ng-template let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Título" prop="name" width="300">
+                            <ng-template let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="SKU" prop="sku" width="300">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Código de Barras" prop="bars_code" width="300">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Preço" prop="price" width="300">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <!--<ngx-datatable-column width="300">-->
+                            <!--<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>-->
+                                <!--<button md-button [route]="['app.products-edit', {id: row['id']}]" style="color: blue">Editar</button>-->
+                            <!--</ng-template>-->
+                        <!--</ngx-datatable-column>-->
+                    </ngx-datatable>
+                </div>
+                <ms-loading-overlay [isLoading]="isLoading"></ms-loading-overlay>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+propel:
+  database:
+      connections:
+          ingles200h:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\ConnectionWrapper
+              dsn: "mysql:host=127.0.0.1;dbname=ingles200h"
+              user: root
+              password: root
+              attributes:
+          ingles200h_model:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\ConnectionWrapper
+              dsn: "mysql:host=127.0.0.1;dbname=ingles200h_model"
+              user: root
+              password: root
+              attributes:
+  runtime:
+      defaultConnection: ingles200h
+      connections:
+          - ingles200h
+  generator:
+      defaultConnection: ingles200h
+      connections:
+          - ingles200h

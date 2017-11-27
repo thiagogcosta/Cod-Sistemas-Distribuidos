@@ -1,0 +1,9 @@
+﻿- cliente x servidor = síncrono
+- cliente x servidor = assíncrono
+- XML-RPC
+- api com resquisição assíncrona e síncrona = teste de carga
+- SOAP = cliente uma línguagem e servidor outra línguagem 
+- API = Rest
+- Graphql
+
+

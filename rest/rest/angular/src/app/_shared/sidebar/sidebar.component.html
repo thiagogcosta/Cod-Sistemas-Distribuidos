@@ -1,0 +1,15 @@
+<div class="logo" style="max-width: 260px;">
+    <a style="text-align: center" href="#" class="simple-text"><h5>SINGLE PAGE APPLICATION - CLIENT</h5></a>
+</div>
+<div class="sidebar-wrapper">
+    <div class="nav-container">
+        <ul class="nav">
+            <li *ngFor="let menuItem of menuItems2" routerLinkActive="active" class="{{menuItem.class}}">
+                <a [routerLink]="[getPath(menuItem)]">
+                    <i class="material-icons">{{menuItem.icon}}</i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
